@@ -1,0 +1,28 @@
+network.tf -> 
+    - contains VPC
+    - contains Internet Gateway(special resource that allows public subnets to have access to the internet)
+
+subnet.tf ->
+    - contains Public Subnets and have public IP so the instances inside such subnets could be requested from the internet
+    - contains Private Subnets that are can send request to the internet via NAT Gateways
+    - contains DB Subnets that are only available inside this VPC
+
+
+nat.tf ->
+    - contains Elastic IP addresses(just ip address that can be bounded to some resources)
+    - contains NAT Gateways(special resource that ables resources inside private network to send requests to the internet)
+
+route_table.tf ->
+    - contains Route Tables that allows receive data from Internet or VPC and could be bounded with
+         subnet and resources like: [Internet Gateway, NAT Gateway, etc...]
+
+key_pair.tf ->
+    - contains ssh-key-pair for connecting to EC2
+
+ec2.tf -> 
+    - contains ec2 instance
+
+auto_scaling_bastion.tf ->
+    - contains Launch Template for running bastion server with some predefined options
+    - contains AutoScaling group(kind of replicaset) that creates Bastion host on one of two available public subnets
+    

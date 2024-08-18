@@ -1,0 +1,20 @@
+----------------------------------------------------------------------------------------------------------------------------
+IPAM (IP Address Manager) Overview
+
+IPAM is a feature provided by AWS to help you automate and manage IP address assignments and usage
+across your AWS infrastructure. It provides a centralized interface to allocate and track IP addresses,
+ensuring that you can efficiently manage IP space within and across VPCs,
+AWS Regions, and even across multiple AWS accounts within an organization.
+ipv4_ipam_pool_id
+
+ - The ipv4_ipam_pool_id parameter is used when creating a VPC.
+It allows you to specify the ID of an IPv4 IPAM pool from which the VPC's CIDR block (IP address range)
+will be allocated.
+
+ - IPAM Pool: An IPAM pool is a collection of CIDR blocks managed by IPAM. It acts as a source of IP addresses
+ that you can use to allocate IP ranges to various network resources like VPCs, subnets, etc.
+
+ - Automated Management: By specifying an ipv4_ipam_pool_id, you allow IPAM to automatically manage and assign 
+a CIDR block to the VPC from the specified pool, making it easier to manage IP address space without manual allocation.
+
+-----------------------------------------------------------------------------------------------------------------------------------
