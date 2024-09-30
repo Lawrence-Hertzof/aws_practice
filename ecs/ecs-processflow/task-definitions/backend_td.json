@@ -1,0 +1,97 @@
+[
+    {
+        "name": "processflo_backend",
+        "image": "432534498488.dkr.ecr.us-west-2.amazonaws.com/processflo_repo",
+        "cpu": 50,
+        "memory": 512,
+        "links": [],
+        "portMappings": [
+            {
+                "containerPort": 8080,
+                "hostPort": 8080,
+                "protocol": "tcp"
+            }
+        ],
+        "essential": true,
+        "entryPoint": [],
+        "command": [],
+        "environment": [
+            {
+                "name": "APP_DB_HOST",
+                "value": "processflow-database.c9kuiqwks3jq.us-west-2.rds.amazonaws.com"
+            },
+            {
+                "name": "APP_TELKOM_BASE_URL",
+                "value": "https://telkom.v3ecentive.co.za/igniteapi"
+            },
+            {
+                "name": "APP_CELERY_WORKFLOWS_CREATE_PER_WORKER",
+                "value": "50"
+            },
+            {
+                "name": "APP_EMAIL_SENDER_EMAIL",
+                "value": "serhii.dubinskyi@pygio.com"
+            },
+            {
+                "name": "APP_CELERY_WORKFLOWS_CHECK_INTERVAL_SECONDS",
+                "value": "15"
+            },
+            {
+                "name": "APP_DB_NAME",
+                "value": "processflow"
+            },
+            {
+                "name": "APP_CELERY_WORKFLOWS_CHECK_PER_WORKER",
+                "value": "50"
+            },
+            {
+                "name": "APP_CELLC_BASE_URL",
+                "value": "https://cellc.v3ecentive.co.za/igniteapi"
+            },
+            {
+                "name": "APP_DB_PORT",
+                "value": "5432"
+            },
+            {
+                "name": "APP_PRODUCTION",
+                "value": "1"
+            }
+        ],
+        "secrets": [
+            {
+                "name": "APP_CELLC_ACCESS_TOKEN",
+                "valueFrom": "arn:aws:ssm:us-west-2:432534498488:parameter/cellc_access_token"
+            },
+            {
+                "name": "APP_DB_PASSWORD",
+                "valueFrom": "arn:aws:ssm:us-west-2:432534498488:parameter/processflow_db_password"
+            },
+            {
+                "name": "APP_DB_USER",
+                "valueFrom": "arn:aws:ssm:us-west-2:432534498488:parameter/processflow_db_username"
+            },
+            {
+                "name": "APP_EMAIL_SENDER_PASSWORD",
+                "valueFrom": "arn:aws:ssm:us-west-2:432534498488:parameter/email_sender_password"
+            },
+            {
+                "name": "APP_TELKOM_ACCESS_TOKEN",
+                "valueFrom": "arn:aws:ssm:us-west-2:432534498488:parameter/telkom_access_token"
+            },
+            {
+                "name": "APP_SLACK_WEBHOOK_URL",
+                "valueFrom": "arn:aws:ssm:us-west-2:432534498488:parameter/slack_webhook_url"
+            }
+        ],
+        "mountPoints": [],
+        "volumesFrom": [],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "/ecs/processflo_backend",
+                "awslogs-region": "us-west-2",
+                "awslogs-stream-prefix": "ecs"
+            }
+        }
+    }
+]

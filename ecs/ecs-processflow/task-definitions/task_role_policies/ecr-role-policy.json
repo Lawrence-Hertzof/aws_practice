@@ -1,0 +1,26 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowReadWriteUpdateECR",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:CompleteLayerUpload",
+                "ecr:DescribeImages",
+                "ecr:BatchGetImage",
+                "ecr:ListImages",
+                "ecr:PutImage",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:DeleteRepository",
+                "ecr:DeleteRepositoryPolicy",
+                "ecr:SetRepositoryPolicy",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:DescribeRepositories",
+                "ecr:GetRepositoryPolicy"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

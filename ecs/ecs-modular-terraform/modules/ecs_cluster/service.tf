@@ -2,6 +2,9 @@ resource "aws_ecs_task_definition" "test-http" {
     family = "test-http"
     container_definitions = "${file("task-definitions/test-http.json")}"
     network_mode = "awsvpc"
+    # task_role_arn = "arn:aws:iam::432534498488:role/ecsTaskExecutionRole"
+    task_role_arn = aws_iam_role.ecs_task_execution_role.arn
+    execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
 }
 
 resource "aws_ecs_service" "test-http" {
@@ -19,7 +22,6 @@ resource "aws_ecs_service" "test-http" {
     }
 
     load_balancer {
-        # elb_name = aws_elb.test-http.id
         target_group_arn = var.lb_target_group_arn
         container_name = "test-http"
         container_port = 8080
