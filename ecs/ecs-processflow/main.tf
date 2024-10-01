@@ -39,7 +39,6 @@ module "load_balancer" { # Before deleting the load_balancer module, make sure t
     vpc_id = module.network.vpc_id
     subnet_ids = module.network.subnet_ids
     load_balancer_name = "EcsLoadBalancer"
-    route53_zone_id = module.route53.route53_zone_id
 } 
 
 module "route53" {
@@ -49,6 +48,19 @@ module "route53" {
     depends_on = [ module.load_balancer ]
 }
 
+
+module "certificate_managment" {
+    source = "./modules/certificate_manager"
+    route53_zone_id = module.route53.route53_zone_id
+}
+
+module "alb_listeners" {
+    source = "./modules/alb_listeners"
+    load_balancer_arn = module.load_balancer.load_balancer_arn
+    target_group_arn = module.load_balancer.target_group_arn
+    acm_certificate_validation_arn = module.certificate_managment.certificate_arn
+    depends_on = [ module.load_balancer, module.certificate_managment ]
+}
 
 
 module "ecs_cluster" { # Before deleting the ecs_cluster module, make sure to delete the ECS service and task definition

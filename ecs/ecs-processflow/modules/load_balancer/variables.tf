@@ -12,7 +12,13 @@ variable "load_balancer_name" {
     type = string
 }
 
-variable "route53_zone_id" {
-    description = "Route53 Zone ID"
-    type = string
-}
+# variable "route53_zone_id" {
+#     description = "Route53 Zone ID"
+#     type = string
+# }
+
+# variable "acm_certificate_validation_arn" {
+#     description = "ACM Certificate Validation ARN"
+#     type = string
+  
+# }
