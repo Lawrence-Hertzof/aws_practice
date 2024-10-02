@@ -5,18 +5,6 @@ resource "aws_route53_zone" "this" {
     }
 
 
-resource "aws_route53_record" "this_A_record" {
-    zone_id = aws_route53_zone.this.zone_id
-    name    = "learning-aws-terraform.com"
-    type    = "A"
-
-    alias {
-        name                   = var.load_balancer_dns_name
-        zone_id                = var.load_balancer_zone_id
-        evaluate_target_health = "true"
-    }
-}
-
 
 resource "aws_route53_record" "this_NS_record" {
     multivalue_answer_routing_policy = "false"

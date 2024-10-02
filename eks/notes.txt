@@ -1,0 +1,4 @@
+DESTROY CLUSTER WITH [EKSCTL] -> eksctl delete cluster -f cluster_config.yml --disable-nodegroup-eviction
+
+PUSH TO LAWRENCE_REPO -> GIT_SSH_COMMAND='ssh -i ~/.ssh/lawrence_key' git push
+
