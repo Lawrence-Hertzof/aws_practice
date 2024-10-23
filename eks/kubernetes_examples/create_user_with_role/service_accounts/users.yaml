@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: deployer
+  namespace: default
+
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: deployer-user-token
+  annotations:
+    kubernetes.io/service-account.name: deployer
+type: kubernetes.io/service-account-token
+

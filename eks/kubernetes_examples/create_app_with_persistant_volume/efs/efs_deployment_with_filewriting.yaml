@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web-deployment
+  labels:
+    app: my-k8s-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: filewriter
+  template:
+    metadata:
+      labels:
+        project: filewriter
+    spec:
+      containers:
+        - name: filewriter
+          image: sasuke1uchiha1ninja/myrepo:flask_filewriter
+          ports:
+            - containerPort: 80
+#          volumeMounts:
+#            - name: efs-storage
+#              mountPath: /app/storage   # Path where the volume is mounted in the container
+#      volumes:
+#        - name: efs-storage
+#          persistentVolumeClaim:
+#            claimName: efs-pvc  # Reference to the PVC created earlier
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-single-pod-service
+  labels:
+    env  : prod
+    owner: SerhiiDubinskyi
+spec:
+  selector:
+    project: filewriter    # Selecting PODS with those Labels
+  ports:
+    - name      : app-listener
+      protocol  : TCP
+      port      : 80  # Port on Load Balancer
+      targetPort: 80  # Port on POD
+  type: LoadBalancer
